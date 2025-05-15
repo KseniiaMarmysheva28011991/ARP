@@ -1,0 +1,186 @@
+Id,TaskNo,ResponseId,Difficulty,Query,"Rewrite time, ms",Error
+226,534,10,Medium,"SELECT 
+    a1.player_id, 
+    a1.event_date, 
+    SUM(a2.games_played) OVER (PARTITION BY a1.player_id ORDER BY a1.event_date) AS games_played_so_far 
+FROM 
+    schema_534.activity a1
+ORDER BY 
+    a1.player_id, 
+    a1.event_date",9193,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""a2""
+  Position: 56"
+248,534,81,Medium,"SELECT 
+    a.player_id, 
+    a.event_date, 
+    SUM(b.games_played) OVER (PARTITION BY a.player_id ORDER BY a.event_date) AS games_played_so_far
+FROM 
+    schema_534.activity a
+ORDER BY 
+    a.player_id, 
+    a.event_date;",9290,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""b""
+  Position: 54"
+249,534,82,Medium,"SELECT 
+    a.player_id, 
+    a.event_date, 
+    SUM(b.games_played) OVER (PARTITION BY a.player_id ORDER BY a.event_date) AS games_played_so_far
+FROM 
+    schema_534.activity a
+ORDER BY 
+    a.player_id, 
+    a.event_date",6960,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""b""
+  Position: 54"
+251,534,90,Medium,"SELECT 
+    a.player_id, 
+    a.event_date, 
+    SUM(b.games_played) OVER (PARTITION BY a.player_id ORDER BY a.event_date) AS games_played_so_far
+FROM 
+    schema_534.activity a",8354,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""b""
+  Position: 54
+"
+255,534,95,Medium,"SELECT 
+    a1.player_id, 
+    a1.event_date, 
+    SUM(a2.games_played) OVER (PARTITION BY a1.player_id ORDER BY a1.event_date) AS games_played_so_far
+FROM 
+    schema_534.activity a1
+ORDER BY 
+    a1.player_id, 
+    a1.event_date",7522,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""a2""
+  Position: 56"
+262,534,116,Medium,"SELECT 
+    b.player_id, 
+    b.event_date, 
+    SUM(a.games_played) OVER (PARTITION BY b.player_id ORDER BY b.event_date) AS games_played_so_far
+FROM 
+    schema_534.activity b
+ORDER BY 
+    b.player_id, 
+    b.event_date",6505,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""a""
+  Position: 54
+"
+714,1149,45,Medium,"SELECT viewer_id AS id
+FROM schema_1149.views
+GROUP BY viewer_id, view_date
+HAVING COUNT(DISTINCT article_id) >= 2
+GROUP BY viewer_id
+ORDER BY viewer_id;",6873,"SQL Error [42601]: ERROR: syntax error at or near ""GROUP""
+  Position: 116"
+725,1149,111,Medium,"SELECT viewer_id AS id
+FROM schema_1149.views
+GROUP BY viewer_id, view_date
+HAVING COUNT(DISTINCT article_id) > 1
+GROUP BY viewer_id;",5860,"SQL Error [42601]: ERROR: syntax error at or near ""GROUP""
+  Position: 115"
+797,1308,11,Medium,"SELECT 
+    a.gender, 
+    a.day, 
+    SUM(b.score_points) OVER (PARTITION BY a.gender ORDER BY a.day) AS total 
+FROM 
+    schema_1308.scores a 
+ORDER BY 
+    a.gender ASC, 
+    a.day ASC",9371,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""b""
+  Position: 44
+"
+822,1308,121,Medium,"SELECT 
+    a.gender, 
+    a.day, 
+    SUM(b.score_points) OVER (PARTITION BY a.gender ORDER BY a.day) AS total
+FROM 
+    schema_1308.scores a
+ORDER BY 
+    a.gender, 
+    a.day",8430,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""b""
+  Position: 44 "
+823,1308,122,Medium,"SELECT 
+    a.gender, 
+    a.day, 
+    SUM(b.score_points) OVER (PARTITION BY a.gender ORDER BY a.day) AS total 
+FROM 
+    schema_1308.scores a 
+ORDER BY 
+    a.gender, 
+    a.day",9351,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""b""
+  Position: 44"
+824,1308,138,Medium,"SELECT 
+    a.gender, 
+    a.day, 
+    SUM(b.score_points) OVER (PARTITION BY a.gender ORDER BY a.day) AS total
+FROM 
+    schema_1308.scores a
+ORDER BY 
+    a.gender, a.day;",9541,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""b""
+  Position: 44"
+846,1308,283,Medium,"SELECT 
+    p1.gender, 
+    p1.day, 
+    SUM(p2.score_points) OVER (PARTITION BY p1.gender ORDER BY p1.day) AS total
+FROM 
+    schema_1308.scores p1
+GROUP BY 
+    p1.gender, p1.day, p1.score_points
+ORDER BY 
+    p1.gender, p1.day;",9931,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""p2""
+  Position: 46
+"
+852,1308,311,Medium,"SELECT 
+    s1.gender, 
+    s1.day, 
+    SUM(s2.score_points) OVER (PARTITION BY s1.gender ORDER BY s1.day) AS total 
+FROM 
+    schema_1308.scores s1 
+JOIN 
+    schema_1308.scores s2 ON s1.gender = s2.gender AND s2.day <= s1.day 
+GROUP BY 
+    s1.gender, s1.day, s1.score_points 
+ORDER BY 
+    s1.gender, s1.day",9335,"SQL Error [42803]: ERROR: column ""s2.score_points"" must appear in the GROUP BY clause or be used in an aggregate function
+  Position: 46"
+853,1308,314,Medium,"SELECT 
+    t1.gender, 
+    t1.day, 
+    SUM(t2.score_points) OVER (PARTITION BY t1.gender ORDER BY t1.day) AS total
+FROM 
+    schema_1308.scores t1
+ORDER BY 
+    t1.gender, 
+    t1.day",9375,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""t2""
+  Position: 46"
+923,1378,123,Easy,"SELECT e.unique_id, e.name FROM schema_1378.employees e LEFT JOIN LATERAL (SELECT u.unique_id FROM schema_1378.employeeuni u WHERE u.id = e.id LIMIT 1) u ON true;",6325,"SQL Error [42703]: ERROR: column e.unique_id does not exist
+  Hint: Perhaps you meant to reference the column ""u.unique_id"".
+  Position: 8"
+925,1378,128,Easy,"SELECT employee_uni.unique_id, employees.name 
+FROM schema_1378.employees 
+LEFT JOIN schema_1378.employeeuni ON employees.id = employee_uni.id",6082,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""employee_uni""
+  Position: 128
+"
+927,1378,132,Easy,"SELECT e.unique_id, e.name 
+FROM schema_1378.employees e 
+LEFT JOIN LATERAL (SELECT unique_id FROM schema_1378.employeeuni uni WHERE uni.id = e.id LIMIT 1) uni ON true",5713,"SQL Error [42703]: ERROR: column e.unique_id does not exist
+  Hint: Perhaps you meant to reference the column ""uni.unique_id"".
+  Position: 8"
+976,1378,330,Easy,"SELECT e.unique_id, e.name 
+FROM schema_1378.employees e 
+LEFT JOIN LATERAL (
+    SELECT eu.unique_id 
+    FROM schema_1378.employeeuni eu 
+    WHERE eu.id = e.id 
+    LIMIT 1
+) eu ON true;",6338,"SQL Error [42703]: ERROR: column e.unique_id does not exist
+  Hint: Perhaps you meant to reference the column ""eu.unique_id"".
+  Position: 8"
+979,1378,338,Easy,"SELECT e.unique_id, e.name 
+FROM schema_1378.employeeuni AS en 
+RIGHT JOIN schema_1378.employees AS e ON en.id = e.id;",5161,"SQL Error [42703]: ERROR: column e.unique_id does not exist
+  Hint: Perhaps you meant to reference the column ""en.unique_id"".
+  Position: 8"
+980,1378,342,Easy,"SELECT e.unique_id, e.name 
+FROM schema_1378.employees e 
+LEFT JOIN schema_1378.employeeuni euni USING (id);",5892,"SQL Error [42703]: ERROR: column e.unique_id does not exist
+  Hint: Perhaps you meant to reference the column ""euni.unique_id"".
+  Position: 8"
+984,1378,362,Easy,"SELECT e.unique_id, e.name 
+FROM schema_1378.employeeuni AS n 
+RIGHT OUTER JOIN schema_1378.employees AS e ON n.id = e.id;",5214,"SQL Error [42703]: ERROR: column e.unique_id does not exist
+  Hint: Perhaps you meant to reference the column ""n.unique_id"".
+  Position: 8"

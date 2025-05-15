@@ -1,0 +1,132 @@
+Id,TaskNo,ResponseId,Difficulty,Query,"Rewrite time, ms",Error
+167,184,18,Medium,"SELECT ""department0"".""name1"", ""t0"".""name"", ""t0"".""salary""
+FROM (SELECT *
+        FROM schema_184.""employee"",
+                (SELECT ""departmentid0"", MAX(""salary0"") AS ""salary""
+                FROM schema_184.""employee"" AS ""employee0"" (""id0"", ""name0"", ""salary0"", ""departmentid0"")
+                GROUP BY ""departmentid0"") AS ""t""
+        WHERE ""employee"".""departmentid"" = ""t"".""departmentid0"" AND ""employee"".""salary"" = ""t"".""salary"") AS ""t0"",
+    schema_184.""department"" AS ""department0"" (""id1"", ""name1"")
+WHERE ""t0"".""departmentid"" = ""department0"".""id1"";",73082,"SQL Error [42702]: ERROR: column reference ""salary"" is ambiguous
+  Position: 44"
+173,184,78,Medium,"SELECT ""department0"".""name0"", ""employee"".""name"", ""employee"".""salary""
+FROM schema_184.""employee""
+    INNER JOIN schema_184.""department"" AS ""department0"" (""id0"", ""name0"") ON ""employee"".""departmentid"" = ""department0"".""id0""
+WHERE ""employee"".""salary"" = (MAX(""employee"".""salary"") OVER (PARTITION BY ""employee"".""departmentid"" RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING))
+GROUP BY ();",73320,"SQL Error [42P20]: ERROR: window functions are not allowed in WHERE
+  Position: 250"
+180,184,152,Medium,"SELECT ""name0"", ""name"", ""salary""
+FROM (SELECT *
+        FROM schema_184.""employee"",
+            schema_184.""department"" AS ""department0"" (""id0"", ""name0"")
+        WHERE ""employee"".""departmentid"" = ""department0"".""id0"" AND EXISTS (SELECT 1
+                FROM (SELECT MAX(""salary0"") AS ""salary"", ""departmentid0""
+                        FROM schema_184.""employee"" AS ""employee0"" (""id1"", ""name1"", ""salary0"", ""departmentid0"")
+                        GROUP BY ""departmentid0"") AS ""t1""
+                WHERE ""t"".""departmentid"" = ""t1"".""departmentid0"" AND ""t"".""salary"" = ""t1"".""salary"")) AS ""t"";",85555,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""t""
+  Position: 502"
+187,184,179,Medium,"SELECT ""department0"".""name0"", ""employee"".""name"", ""employee"".""salary""
+FROM schema_184.""employee""
+    INNER JOIN schema_184.""department"" AS ""department0"" (""id0"", ""name0"") ON ""employee"".""departmentid"" = ""department0"".""id0""
+WHERE ""employee"".""salary"" = (MAX(""employee"".""salary"") OVER (PARTITION BY ""employee"".""departmentid"" RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING))
+GROUP BY ();",63540,"SQL Error [42P20]: ERROR: window functions are not allowed in WHERE
+  Position: 250"
+195,184,295,Medium,"SELECT ""department0"".""name1"", ""t1"".""name"", ""t1"".""salary""
+FROM (SELECT *
+        FROM schema_184.""employee"",
+                (SELECT MAX(""salary0"") AS ""salary"", ""departmentid0""
+                FROM schema_184.""employee"" AS ""employee0"" (""id0"", ""name0"", ""salary0"", ""departmentid0"")
+                GROUP BY ""departmentid0"") AS ""t0""
+        WHERE ""employee"".""salary"" = ""t0"".""salary"" AND ""employee"".""departmentid"" = ""t0"".""departmentid0"") AS ""t1"",
+    schema_184.""department"" AS ""department0"" (""id1"", ""name1"")
+WHERE ""department0"".""id1"" = ""t1"".""departmentid"";",94421,"SQL Error [42702]: ERROR: column reference ""salary"" is ambiguous
+  Position: 44"
+203,184,355,Medium,"SELECT ""name0"", ""name"", ""salary""
+FROM (SELECT ""t"".""name"", ""t"".""salary"", ""t"".""departmentid"", ""t0"".""name0""
+        FROM (SELECT ""name"", ""salary"", ""departmentid""
+                FROM schema_184.""employee"") AS ""t"",
+                (SELECT *
+                FROM schema_184.""department"" AS ""department"" (""id0"", ""name0"")) AS ""t0""
+        WHERE ""t"".""departmentid"" = ""t0"".""id0"" AND EXISTS (SELECT 1
+                FROM (SELECT *
+                        FROM (SELECT MAX(""salary0"") AS ""salary"", ""departmentid0""
+                                FROM schema_184.""employee"" AS ""employee0"" (""id1"", ""name1"", ""salary0"", ""departmentid0"")
+                                GROUP BY ""departmentid0"") AS ""t4""
+                        WHERE ""salary"" IS NOT NULL AND ""departmentid0"" IS NOT NULL) AS ""t6""
+                WHERE ""t2"".""salary"" = ""t6"".""salary"" AND ""t2"".""departmentid"" = ""t6"".""departmentid0"")) AS ""t2"";",125182,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""t2""
+  Position: 803
+"
+208,184,371,Medium,"SELECT ""name0"", ""name"", ""salary""
+FROM (SELECT *
+        FROM schema_184.""employee"",
+            schema_184.""department"" AS ""department0"" (""id0"", ""name0"")
+        WHERE ""employee"".""departmentid"" = ""department0"".""id0"" AND EXISTS (SELECT 1
+                FROM (SELECT MAX(""salary0"") AS ""salary"", ""departmentid0""
+                        FROM schema_184.""employee"" AS ""employee0"" (""id1"", ""name1"", ""salary0"", ""departmentid0"")
+                        GROUP BY ""departmentid0"") AS ""t1""
+                WHERE ""t"".""salary"" = ""t1"".""salary"" AND ""t"".""departmentid"" = ""t1"".""departmentid0"")) AS ""t"";",103246,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""t""
+  Position: 502
+"
+212,184,428,Medium,"SELECT ""name0"", ""name"", ""salary""
+FROM (SELECT *
+        FROM schema_184.""employee"",
+            schema_184.""department"" AS ""department0"" (""id0"", ""name0"")
+        WHERE ""employee"".""departmentid"" = ""department0"".""id0"" AND EXISTS (SELECT 1
+                FROM (SELECT MAX(""salary0"") AS ""salary"", ""departmentid0""
+                        FROM schema_184.""employee"" AS ""employee0"" (""id1"", ""name1"", ""salary0"", ""departmentid0"")
+                        GROUP BY ""departmentid0"") AS ""t1""
+                WHERE ""t"".""salary"" = ""t1"".""salary"" AND ""t"".""departmentid"" = ""t1"".""departmentid0"")) AS ""t"";",99947,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""t""
+  Position: 502"
+213,184,430,Medium,"SELECT ""name0"", ""name"", ""salary""
+FROM (SELECT *
+        FROM schema_184.""employee"",
+            schema_184.""department"" AS ""department0"" (""id0"", ""name0"")
+        WHERE ""employee"".""departmentid"" = ""department0"".""id0"" AND EXISTS (SELECT 1
+                FROM (SELECT MAX(""salary0"") AS ""highest_salary"", ""departmentid0""
+                        FROM schema_184.""employee"" AS ""employee0"" (""id1"", ""name1"", ""salary0"", ""departmentid0"")
+                        GROUP BY ""departmentid0"") AS ""t1""
+                WHERE ""t"".""salary"" = ""t1"".""highest_salary"" AND ""t"".""departmentid"" = ""t1"".""departmentid0"")) AS ""t"";",95470,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""t""
+  Position: 510"
+214,184,436,Medium,"SELECT ""name0"", ""name"", ""salary""
+FROM (SELECT *
+        FROM schema_184.""employee"",
+            schema_184.""department"" AS ""department0"" (""id0"", ""name0"")
+        WHERE ""department0"".""id0"" = ""employee"".""departmentid"" AND EXISTS (SELECT 1
+                FROM (SELECT MAX(""salary0"") AS ""max_salary"", ""departmentid0""
+                        FROM schema_184.""employee"" AS ""employee0"" (""id1"", ""name1"", ""salary0"", ""departmentid0"")
+                        GROUP BY ""departmentid0"") AS ""t1""
+                WHERE ""t"".""salary"" = ""t1"".""max_salary"" AND ""t"".""departmentid"" = ""t1"".""departmentid0"")) AS ""t"";",75580,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""t""
+  Position: 506"
+311,585,231,Medium,"SELECT SUM(""tiv_2016"") AS ""tiv_2016""
+FROM schema_585.""insurance""
+WHERE (COUNT(""tiv_2015"") OVER (PARTITION BY ""tiv_2015"" RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)) > 1 AND (COUNT(""lat"") OVER (PARTITION BY ""lat"", ""lon"" RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)) = 1 AND (COUNT(""lon"") OVER (PARTITION BY ""lat"", ""lon"" RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)) = 1
+GROUP BY ();",105428,"SQL Error [42P20]: ERROR: window functions are not allowed in WHERE
+  Position: 73"
+509,1069,5,Easy,"SELECT ""product_id"", SUM(""quantity"") OVER (PARTITION BY ""product_id"" RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS ""total_quantity""
+FROM schema_1069.""sales""
+GROUP BY ""product_id"", SUM(""quantity"") OVER (PARTITION BY ""product_id"" RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING);",74316,"SQL Error [42P20]: ERROR: window functions are not allowed in GROUP BY
+  Position: 197"
+542,1069,112,Easy,"SELECT ""product_id"", SUM(""quantity"") OVER (PARTITION BY ""product_id"" ORDER BY ""product_id"" RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS ""total_quantity""
+FROM schema_1069.""sales""
+GROUP BY ""product_id"", SUM(""quantity"") OVER (PARTITION BY ""product_id"" ORDER BY ""product_id"" RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW);",80814,"SQL Error [42P20]: ERROR: window functions are not allowed in GROUP BY
+  Position: 211"
+564,1077,121,Medium,"SELECT ""project_id"", ""employee_id""
+FROM (SELECT ""project"".""project_id"", ""project"".""employee_id"", ""employee0"".""experience_years""
+        FROM schema_1077.""project""
+            INNER JOIN schema_1077.""employee"" AS ""employee0"" (""employee_id0"", ""name"", ""experience_years"") ON ""project"".""employee_id"" = ""employee0"".""employee_id0""
+        WHERE EXISTS (SELECT 1
+                FROM (SELECT ""project00"".""project_id0"" AS ""project_id"", MAX(""employee10"".""experience_years0"") OVER (PARTITION BY ""project00"".""project_id0"" RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS ""w0$o0""
+                        FROM schema_1077.""project"" AS ""project00"" (""project_id0"", ""employee_id1"")
+                            INNER JOIN schema_1077.""employee"" AS ""employee10"" (""employee_id2"", ""name0"", ""experience_years0"") ON ""project00"".""employee_id1"" = ""employee10"".""employee_id2"") AS ""t2""
+                WHERE ""t0"".""project_id"" = ""t2"".""project_id"" AND ""t0"".""experience_years"" = ""t2"".""w0$o0"")
+        GROUP BY ""project"".""project_id"", ""project"".""employee_id"", ""employee0"".""experience_years"") AS ""t0"";",125644,"SQL Error [42P01]: ERROR: missing FROM-clause entry for table ""t0""
+  Position: 896"
+1028,1729,1,Easy,"SELECT ""user_id"", COUNT(""follower_id"") OVER (PARTITION BY ""user_id"" RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS ""$1""
+FROM schema_1729.""followers""
+GROUP BY ""user_id"", COUNT(""follower_id"") OVER (PARTITION BY ""user_id"" RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING);",72162,"SQL Error [42P20]: ERROR: window functions are not allowed in GROUP BY
+  Position: 185"
+1046,1729,91,Easy,"SELECT ""user_id"", COUNT(""follower_id"") OVER (PARTITION BY ""user_id"" RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS ""followers_count""
+FROM schema_1729.""followers""
+GROUP BY ""user_id"", COUNT(""follower_id"") OVER (PARTITION BY ""user_id"" RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING)
+ORDER BY ""user_id"";",66200,"SQL Error [42P20]: ERROR: window functions are not allowed in GROUP BY
+  Position: 198"
